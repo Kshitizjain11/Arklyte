@@ -5,6 +5,8 @@ import React, { useState } from 'react'
 import {Architects_Daughter} from 'next/font/google'
 import { apiClient } from '@/lib'
 import { Admin_Api_Routes } from '@/utils'
+import { useAppStore } from '@/store'
+import { useRouter } from 'next/navigation'
 const ArchitectsDaughter = Architects_Daughter({
   weight:"400",
   style: "normal",
@@ -14,11 +16,15 @@ const ArchitectsDaughter = Architects_Daughter({
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const router = useRouter()
+  const {setUserInfo} = useAppStore()
+
   const handleLogin = async() => { 
     try {
       const response = await apiClient.post(Admin_Api_Routes.LOGIN,{email,password})
       if (response.data.userInfo){
-        console.log(response.data.userInfo)
+        setUserInfo(response.data.userInfo)
+        router.push('/admin')
       }
     } catch (error) {
       console.log(error)
