@@ -3,10 +3,10 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Input } from '@heroui/r
 import Image from 'next/image'
 import React, { useState } from 'react'
 import {Architects_Daughter} from 'next/font/google'
-import { apiClient } from '@/lib'
 import { Admin_Api_Routes } from '@/utils'
 import { useAppStore } from '@/store'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 const ArchitectsDaughter = Architects_Daughter({
   weight:"400",
   style: "normal",
@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleLogin = async() => { 
     try {
-      const response = await apiClient.post(Admin_Api_Routes.LOGIN,{email,password})
+      const response = await axios.post(Admin_Api_Routes.LOGIN,{email,password})
       if (response.data.userInfo){
         setUserInfo(response.data.userInfo)
         router.push('/admin')

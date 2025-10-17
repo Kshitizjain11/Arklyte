@@ -1,13 +1,13 @@
-import { apiClient } from '@/lib'
 import { Admin_Api_Routes } from '@/utils'
 import { Card, CardBody, CardHeader } from '@heroui/react'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const ScrapingQueue = () => {
     const [onGoingJobs, setOnGoingJobs] = useState(0)
     useEffect(() => {
         const getData = async()=>{
-            const data = await apiClient.get(Admin_Api_Routes.JOB_DETAILS)
+            const data = await axios.get(Admin_Api_Routes.JOB_DETAILS)
             setOnGoingJobs(data.data.onGoingJobs)
         }   
         const interval = setInterval(()=>getData(),3000)

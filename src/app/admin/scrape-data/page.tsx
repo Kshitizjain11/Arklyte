@@ -1,6 +1,5 @@
 "use client"
 import { ScrapingQueue } from '@/app/api/admin/scraping-queue'
-import { apiClient } from '@/lib'
 import { Admin_Api_Routes } from '@/utils'
 import { Button, Card, CardBody, CardFooter, Input, Listbox, ListboxItem, Tab, Tabs } from '@heroui/react'
 import axios from 'axios'
@@ -17,15 +16,15 @@ const ScrapeData = () => {
         setCities(parsed?.map((city : {name: string})=>city.name))
     }
     const startScraping = async ()=>{
-        await apiClient.post(Admin_Api_Routes.CREATE_JOB,{
+        await axios.post(Admin_Api_Routes.CREATE_JOB,{
             url: `https://packages.yatra.com/holidays/intl/search.htm?destination=${selectedCity}`,
             jobType: {type : "location"}
         })
     }
     useEffect(() => {
         const getData = async()=>{
-            const data = await apiClient.get(Admin_Api_Routes.JOB_DETAILS)
-            setJobs(data.data.jobs)
+            const data = await axios.get(Admin_Api_Routes.JOB_DETAILS)
+            setJobs(data?.data?.jobs)
         }   
         const interval = setInterval(()=>getData(),3000)
         return ()=>{
