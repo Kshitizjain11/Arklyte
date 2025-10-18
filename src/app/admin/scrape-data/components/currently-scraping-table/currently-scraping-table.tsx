@@ -10,6 +10,7 @@ import {
   Button,
   Pagination,
   Chip,
+  ChipProps,
 } from "@heroui/react";
 import { FaChevronDown, FaPlus, FaSearch } from "react-icons/fa";
 import Link from "next/link";
@@ -28,7 +29,7 @@ export function capitalize(s:string) {
 //   return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : "";
 // }
 
-const statusColorMap = {
+const statusColorMap:Record<string,ChipProps["color"]> = {  //* Added type here 
   active: "primary",
   failed: "danger",
   complete: "success",
