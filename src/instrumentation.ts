@@ -8,7 +8,7 @@ export const register = async () => {
         const { connection } = await import('@/lib/redis')
         // const {jobsQueue} = await import('@/lib/queue')
         const puppeteer = await import("puppeteer")
-        const BROWSER_WS = "wss://brd-customer-hl_e0b01b8f-zone-arklyte:dap05aepjlci@brd.superproxy.io:9222";
+        const BROWSER_WS = "wss://brd-customer-hl_aebf7289-zone-arklyte:k611nmtpji1p@brd.superproxy.io:9222";
 
         // reduce concurrency to avoid overloading the remote browser
         new Worker("jobsQueue", async (job) => {
@@ -67,7 +67,7 @@ export const register = async () => {
                         }
                     }
                 } else if (job.data.jobType.type === "package") {
-                    console.log(job.data)
+                    // console.log(job.data)
                     // Already Scraped Check
                     // Scrape the Package
                     // Store the package in trips model
