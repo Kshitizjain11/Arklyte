@@ -5,3 +5,7 @@ export const Admin_Api_Routes = {
     JOB_DETAILS:`${baseRoute}/admin/job-details`,
 
 }
+
+export const User_Api_Routes = {
+    GET_ALL_TRIPS : `${baseRoute}/all-trips`
+}
