@@ -1,12 +1,29 @@
 "use client"
+import { TripType } from '@/types/trips'
+import { User_Api_Routes } from '@/utils/api-routes'
+import axios from 'axios'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Trips = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const searchCity = searchParams.get("city")
+    const [trips, setTrips] = useState<TripType[]>([])
 
+    useEffect(() => {
+      const fetchData = async () =>{
+        const data = await axios.get(`${User_Api_Routes.GET_CITY_TRIPS}?city=${searchCity}`)
+        if(data.data.trips) setTrips(data.data.trips)
+      }
+      if (searchCity)
+      {
+        fetchData()
+
+      }
+    
+    }, [searchCity])
+    
   return (
     <div>Trips</div>
   )

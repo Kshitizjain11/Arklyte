@@ -7,5 +7,6 @@ export const Admin_Api_Routes = {
 }
 
 export const User_Api_Routes = {
-    GET_ALL_TRIPS : `${baseRoute}/all-trips`
+    GET_ALL_TRIPS : `${baseRoute}/all-trips`,
+    GET_CITY_TRIPS : `${baseRoute}/city-trips`
 }

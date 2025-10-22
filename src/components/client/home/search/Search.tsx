@@ -18,7 +18,7 @@ const Search = () => {
     const handleSearch = ()=>{
         if(searchLocation && dates)
         {
-            router.push(`/trips?city/=${searchLocation}&dates=${dates}`)
+            router.push(`/trips?city=${searchLocation}&dates=${dates}`)
         }
     }
     const searchCities = async (searchQuery : string) => { 
