@@ -15,35 +15,35 @@ datasource db {
   // directUrl = env("DIRECT_URL")
 }
 
-model Admin{
-  id Int @default(autoincrement()) @id
-  email String @unique
-  password String 
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now())
 }
 
-model Jobs{
-  id Int @default(autoincrement()) @id
-  url String
-  isComplete Boolean @default(false)
-  status String @default("active")
-  jobType Json
-  createdAt DateTime @default(now())
+model Jobs {
+  id         Int      @id @default(autoincrement())
+  url        String
+  isComplete Boolean  @default(false)
+  status     String   @default("active")
+  jobType    Json
+  createdAt  DateTime @default(now())
 }
 
 model Trips {
-  id String @id @unique
-  name String 
-  nights  Int
-  days Int
+  id                   String   @id @unique
+  name                 String
+  nights               Int
+  days                 Int
   destinationItinerary Json
-  images Json
-  inclusions Json
-  thems Json
-  price Int
-  destinationDetails Json
-  detailedItinerary Json
-  description String
-  packageItinerary Json
-  scrapedOn DateTime
+  images               Json
+  inclusions           Json
+  themes               Json
+  price                Int
+  destinationDetails   Json
+  detailedItinerary    Json
+  description          String
+  packageItinerary     Json
+  scrapedOn            DateTime
 }

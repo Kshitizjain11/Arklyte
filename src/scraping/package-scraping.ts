@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { DestinationDetailsType, DestinationItineraryType, DetailedItineraryType, PackageIteniaryType, } from "@/types/trips";
+import { DestinationDetailsType, DestinationItineraryType, DetailedItineraryType, PackageItineraryType, } from "@/types/trips";
 import { Page } from "puppeteer";
 interface PackageInfo {
     id: string | null,
@@ -15,10 +15,10 @@ interface PackageDetailsType {
     description: string,
     images: string[],
     themes: string[],
-    detailedItinary: DetailedItineraryType[],
-    destinationItinary: DestinationItineraryType[],
+    detailedItinerary: DetailedItineraryType[],
+    destinationItinerary: DestinationItineraryType[],
     destinationDetails: DestinationDetailsType[],
-    packageItinerary: PackageIteniaryType[]
+    packageItinerary: PackageItineraryType[]
 
 
 
@@ -32,8 +32,8 @@ export const startPackageScraping = async (page: Page, pkg: PackageInfo) => {
                 description: "",
                 images: [],
                 themes: [],
-                detailedItinary: [],
-                destinationItinary: [],
+                detailedItinerary: [],
+                destinationItinerary: [],
                 destinationDetails: [],
                 packageItinerary: []
             };
@@ -95,7 +95,7 @@ export const startPackageScraping = async (page: Page, pkg: PackageInfo) => {
       descriptions.push({ title, value });
     });
     console.log({ packageDetails });
-    packageDetails.detailedItinary = descriptions;
+    packageDetails.detailedItinerary = descriptions;
 
     const destinationItinerary : {place:string,totalNights:number}[] = []
     const destinationItinerarySelector = packageElement.querySelectorAll(".type-list li") 
@@ -112,7 +112,7 @@ export const startPackageScraping = async (page: Page, pkg: PackageInfo) => {
         }
         destinationItinerary.push({place:placeText!,totalNights})
     })
-    packageDetails.destinationItinary = destinationItinerary
+    packageDetails.destinationItinerary = destinationItinerary
 
      const readMoreButton = document.getElementById("readMore")
      if(readMoreButton){
@@ -248,8 +248,8 @@ export const startPackageScraping = async (page: Page, pkg: PackageInfo) => {
             description: "",
             images: [],
             themes: [],
-            detailedItinary: [],
-            destinationItinary: [],
+            detailedItinerary: [],
+            destinationItinerary: [],
             destinationDetails: [],
             packageItinerary: []
         };
