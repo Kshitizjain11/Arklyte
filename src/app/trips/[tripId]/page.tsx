@@ -33,14 +33,28 @@ const Trip = ({ params }: { params: { tripId: string } }) => {
         setTripData(data.data);
       }
     };
-    fetchTripData();
+    if (tripId){
+      fetchTripData(); 
+    }
   }, [tripId]);
 
   const handleDateChange = (event : React.ChangeEvent<HTMLInputElement>) => {
     const newDate = event.target.value ? new Date(event.target.value) : new Date()  
     setDate(newDate)
   };
-  const bookTrip = () => {};
+  const bookTrip = async() => {
+    const isoDate = date.toISOString()
+    const response = await axios.post(User_Api_Routes.CREATE_BOOKING,{
+      bookingId:  tripData?.id,
+      bookingType : "trips",
+      userId: userInfo?.id,
+      taxes: 3300,
+      date: isoDate
+    })
+    if (response.data) {
+      router.push(`/checkout?client_secret=${response.data.client_secret}`)
+    }
+  };
 
   return (
     <div>

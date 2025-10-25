@@ -12,7 +12,7 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  // directUrl = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Admin {
@@ -29,6 +29,7 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  bookings Bookings[]
 }
 
 model Jobs {
@@ -55,4 +56,17 @@ model Trips {
   description          String
   packageItinerary     Json
   scrapedOn            DateTime
+}
+
+model Bookings {
+  id Int @default(autoincrement()) @id
+  createdAt DateTime @default(now())
+  date DateTime
+  bookingType String
+  bookingTypeId String
+  userId Int
+  totalAmount Int
+  paymentIntent String @unique
+  isCompleted Boolean @default(false)
+  user User @relation(fields: [userId],references: [id])
 }
