@@ -17,7 +17,7 @@ import {
 } from "react-icons/fa";
 import { IoPerson, IoPricetag } from "react-icons/io5";
 import { Itinerary } from "./components/itinerary";
-import { Images as ImageGallery, Images } from "./components/images";
+import { Images as ImageGallery } from "./components/images";
 
 const Trip = ({ params }: { params: { tripId: string } }) => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const Trip = ({ params }: { params: { tripId: string } }) => {
     <div>
       {tripData && (
         <>
-          <Images images={tripData?.images} />
+          <ImageGallery images={tripData?.images} />
           <div className="grid grid-cols-3 my-10 gap-10 mx-32">
             <div className="col-span-2 ">
               <div className="bg-white px-5 py-5 rounded-lg flex flex-col gap-10 text-blue-text-title">
@@ -114,7 +114,7 @@ const Trip = ({ params }: { params: { tripId: string } }) => {
                     <strong className="font-medium">Tour Highlights</strong>
                   </h3>
                   <ul className="grid grid-cols-4 gap-5 mt-3">
-                    {tripData?.thems.map((theme) => (
+                    {tripData?.themes.map((theme) => (
                       <li className="flex gap-2 items-center " key={theme}>
                         <span className="text-sm text-blue-500 bg-blue-100 p-2 rounded-full">
                           <FaCheck />

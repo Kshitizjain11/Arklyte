@@ -85,7 +85,7 @@ export const register = async () => {
                                 destinationItinerary: Array.isArray(pkg.destinationItinerary) ? pkg.destinationItinerary : [],
                                 images: Array.isArray(pkg.images) ? pkg.images : [],
                                 inclusions: Array.isArray(pkg.inclusions) ? pkg.inclusions : [],
-                                thems: Array.isArray(pkg.themes) ? pkg.themes : [],
+                                themes: Array.isArray(pkg.themes) ? pkg.themes : [],
                                 price: pkg.price || 0,
                                 destinationDetails: Array.isArray(pkg.destinationDetails) ? pkg.destinationDetails : [],
                                 detailedItinerary: Array.isArray(pkg.detailedItinerary) ? pkg.detailedItinerary : [],
