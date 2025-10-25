@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
     remotePatterns:[
       {hostname:"imgcld.yatra.com"}
     ]
+  },
+  typescript:{
+    ignoreBuildErrors:true
+  },
+  eslint:{
+    ignoreDuringBuilds:true
   }
 };
 

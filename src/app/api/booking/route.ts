@@ -63,3 +63,20 @@ export const POST = async (request: Request) => {
     );
   }
 };
+
+export const PATCH = async(request: Request)=>{
+  try {
+    const {paymentIntent} = await request.json();
+    if (paymentIntent){
+      await prisma.bookings.update({
+        where:{paymentIntent},data:{isCompleted:true}
+      })
+      return NextResponse.json({message:"Payment Successful"},{status:200})
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { message: "An unexpected error occurred." },
+      { status: 500 }
+    );
+  }
+}
