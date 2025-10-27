@@ -1,8 +1,8 @@
 "use client";
-import { apiClient } from "@/lib";
 import { TripType } from "@/types/trips";
 import { User_Api_Routes } from "@/utils/api-routes";
 import { Button, Chip } from "@heroui/react";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const TripsContent = () => {
     const getData = async () => {
       if (!searchCity) return;
       try {
-        const response = await apiClient.get(
+        const response = await axios.get(
           `${User_Api_Routes.GET_CITY_TRIPS}?city=${searchCity}`
         );
         setTrips(response.data.trips);
