@@ -5,23 +5,38 @@ import { User_Api_Routes } from "@/utils/api-routes";
 import { Button, Chip } from "@heroui/react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
-const Trips = () => {
+const TripsContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchCity = searchParams.get("city");
   const [trips, setTrips] = useState<TripType[]>([]);
+  
   useEffect(() => {
     const getData = async () => {
-      const response = await apiClient.get(
-        `${User_Api_Routes.GET_CITY_TRIPS}?city=${searchCity}`
-      );
-      setTrips(response.data.trips);
+      if (!searchCity) return;
+      try {
+        const response = await apiClient.get(
+          `${User_Api_Routes.GET_CITY_TRIPS}?city=${searchCity}`
+        );
+        setTrips(response.data.trips);
+      } catch (error) {
+        console.error("Error fetching trips:", error);
+      }
     };
-    if (searchCity) getData();
+    
+    getData();
   }, [searchCity]);
+
+  if (!searchCity) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div>Please select a city to view trips.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="m-10 px-[5vw] min-h-[80vh]">
@@ -95,6 +110,18 @@ const Trips = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+const Trips = () => {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div>Loading trips...</div>
+      </div>
+    }>
+      <TripsContent />
+    </Suspense>
   );
 };
 

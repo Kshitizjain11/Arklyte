@@ -1,13 +1,13 @@
 "use client"
 import { Elements } from '@stripe/react-stripe-js'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import CheckoutForm from './components/checkout-form/checkout-form'
 import { loadStripe } from '@stripe/stripe-js'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY || "")
 
-const Checkout = () => {
+const CheckoutContent = () => {
     const [clientSecret, setClientSecret] = useState("")
     const searchParams = useSearchParams()
     const client_secret = searchParams.get("client_secret")
@@ -27,5 +27,11 @@ const Checkout = () => {
     </div>
   )
 }
+
+const Checkout = () => (
+    <React.Suspense fallback={<div>Loading...</div>}>
+        <CheckoutContent />
+    </React.Suspense>
+);
 
 export default Checkout
